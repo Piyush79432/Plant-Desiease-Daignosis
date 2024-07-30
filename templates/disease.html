@@ -1,0 +1,98 @@
+{% extends 'layout.html' %} 
+{% block body %}
+
+<style>
+  html body {
+    background-color:  #045D5D ;
+  }
+
+  .form-container {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .form-container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-signin h2 {
+    margin-bottom: 20px;
+  }
+
+  .form-signin .form-control-file {
+    margin-bottom: 20px;
+  }
+
+  .form-signin button {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .form-signin button:hover {
+    background-color: #3e8e41;
+  }
+
+  @media (max-width: 768px) {
+    .form-container {
+      max-width: 100%;
+      padding: 10px;
+    }
+
+    .form-signin h2 {
+      font-size: 1.5rem;
+    }
+
+    .form-signin .form-control-file {
+      margin-bottom: 10px;
+    }
+
+    .form-signin button {
+      margin-top: 10px;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 form-container">
+      <h2 class="h4 mb-3 font-weight-normal"><b>Find out which disease has been caught by your plant</b></h2>
+      <form class="form-signin" method=post enctype=multipart/form-data>
+        <input type="file" name="file" class="form-control-file" id="inputfile" onchange="preview_image(event)" style="font-weight: bold;">
+        <br>
+        <br>
+        <img id="output-image" class="rounded mx-auto d-block" />
+        <button class="btn btn-primary" type="submit" style="font-weight: bold;">Predict</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.getElementById('output-image')
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+
+{% endblock %}
